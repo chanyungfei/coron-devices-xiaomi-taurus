@@ -10828,6 +10828,8 @@
 
     invoke-virtual {p1, v4, v0}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;
 
+    invoke-static/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->flashRegister(Lcom/android/internal/policy/impl/PhoneWindowManager;)V
+
     .line 1003
     new-instance v4, Lcom/android/internal/policy/impl/SystemGesturesPointerEventListener;
 
@@ -11503,6 +11505,7 @@
     .end local v30           #now:J
     .end local v37           #timeoutTime:J
     :goto_2
+    :goto_baidu_0
     return-wide v5
 
     .end local v15           #canceled:Z
@@ -11629,6 +11632,24 @@
     goto :goto_2
 
     :cond_8
+    const/4 v3, -0x1
+
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p2
+
+    invoke-static {v0, v1}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->longPressKiller(Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/view/KeyEvent;)I
+
+    move-result v5
+
+    if-ne v3, v5, :cond_baidu_0
+
+    const-wide/16 v5, -0x1
+
+    goto :goto_baidu_0
+
+    :cond_baidu_0
+
     const/4 v3, 0x3
 
     move/from16 v0, v25
@@ -11778,7 +11799,7 @@
     goto/16 :goto_2
 
     :cond_c
-    invoke-virtual/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchHomeFromHotKey()V
+    invoke-static/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->launchHomeFromHotKeyIfNeeded(Lcom/android/internal/policy/impl/PhoneWindowManager;)V
 
     const-wide/16 v5, -0x1
 
@@ -11822,6 +11843,12 @@
     if-ne v0, v3, :cond_10
 
     :cond_e
+    move-object/from16 v0, p0
+
+    move-object/from16 v1, p2
+
+    invoke-static {v0, v1}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->flashOpen(Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/view/KeyEvent;)V
+
     const-wide/16 v5, 0x0
 
     goto/16 :goto_2
@@ -13474,6 +13501,8 @@
     move-result v17
 
     if-nez v17, :cond_0
+
+    invoke-static/range {p0 .. p1}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->interceptKeyBeforeQueueingHook(Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/view/KeyEvent;)V
 
     .line 4053
     sparse-switch v12, :sswitch_data_0

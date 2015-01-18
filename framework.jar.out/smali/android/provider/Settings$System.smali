@@ -72,6 +72,16 @@
 
 .field public static final BATTERY_PERCENTAGE_INDICATOR:Ljava/lang/String; = "battery_percentage_indicator"
 
+.field public static final BATTERY_LIGHT_ENABLED:Ljava/lang/String; = "battery_light_enabled"
+
+.field public static final BATTERY_LIGHT_FULL_COLOR:Ljava/lang/String; = "battery_light_full_color"
+
+.field public static final BATTERY_LIGHT_LOW_COLOR:Ljava/lang/String; = "battery_light_low_color"
+
+.field public static final BATTERY_LIGHT_MEDIUM_COLOR:Ljava/lang/String; = "battery_light_medium_color"
+
+.field public static final BATTERY_LIGHT_PULSE:Ljava/lang/String; = "battery_light_pulse"
+
 .field public static final BLUETOOTH_DISCOVERABILITY:Ljava/lang/String; = "bluetooth_discoverability"
 
 .field public static final BLUETOOTH_DISCOVERABILITY_TIMEOUT:Ljava/lang/String; = "bluetooth_discoverability_timeout"

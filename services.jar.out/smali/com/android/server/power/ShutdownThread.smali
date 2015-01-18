@@ -750,11 +750,18 @@
 
     .line 155
     .local v1, dialog:Landroid/app/AlertDialog;
-    new-instance v4, Lcom/android/server/power/ShutdownThread$3;
 
-    invoke-direct {v4}, Lcom/android/server/power/ShutdownThread$3;-><init>()V
+    #new-instance v4, Lcom/android/server/power/ShutdownThread$3;
 
-    invoke-virtual {v1, v4}, Landroid/app/AlertDialog;->setOnKeyListener(Landroid/content/DialogInterface$OnKeyListener;)V
+    #invoke-direct {v4}, Lcom/android/server/power/ShutdownThread$3;-><init>()V
+
+    #invoke-virtual {v1, v4}, Landroid/app/AlertDialog;->setOnKeyListener(Landroid/content/DialogInterface$OnKeyListener;)V
+
+    sput-object v1, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/power/ShutdownThread$BaiduInjector;->createRebootDialogBaidu(Landroid/content/Context;)V
+
+    sget-object v1, Lcom/android/server/power/ShutdownThread;->sConfirmDialog:Landroid/app/AlertDialog;
 
     :goto_2
     iput-object v1, v0, Lcom/android/server/power/ShutdownThread$CloseDialogReceiver;->dialog:Landroid/app/Dialog;
