@@ -9,6 +9,7 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
+        Lcom/android/server/power/PowerManagerService$BaiduInjector;,
         Lcom/android/server/power/PowerManagerService$DisplayBlankerImpl;,
         Lcom/android/server/power/PowerManagerService$ScreenOnBlockerImpl;,
         Lcom/android/server/power/PowerManagerService$SuspendBlockerImpl;,
@@ -3086,7 +3087,7 @@
 
     .line 527
     .local v0, resources:Landroid/content/res/Resources;
-    const v1, 0x111001b
+    const v1, #android:bool@config_unplugTurnsOnScreen#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -3094,8 +3095,7 @@
 
     iput-boolean v1, p0, Lcom/android/server/power/PowerManagerService;->mWakeUpWhenPluggedOrUnpluggedConfig:Z
 
-    .line 529
-    const v1, 0x1110023
+    const v1, #android:bool@config_suspendWhenScreenOffDueToProximity#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -3103,8 +3103,7 @@
 
     iput-boolean v1, p0, Lcom/android/server/power/PowerManagerService;->mSuspendWhenScreenOffDueToProximityConfig:Z
 
-    .line 531
-    const v1, 0x111004a
+    const v1, #android:bool@config_dreamsSupported#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -3112,8 +3111,7 @@
 
     iput-boolean v1, p0, Lcom/android/server/power/PowerManagerService;->mDreamsSupportedConfig:Z
 
-    .line 533
-    const v1, 0x111004b
+    const v1, #android:bool@config_dreamsEnabledByDefault#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -3121,8 +3119,7 @@
 
     iput-boolean v1, p0, Lcom/android/server/power/PowerManagerService;->mDreamsEnabledByDefaultConfig:Z
 
-    .line 535
-    const v1, 0x111004d
+    const v1, #android:bool@config_dreamsActivatedOnSleepByDefault#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -3130,8 +3127,7 @@
 
     iput-boolean v1, p0, Lcom/android/server/power/PowerManagerService;->mDreamsActivatedOnSleepByDefaultConfig:Z
 
-    .line 537
-    const v1, 0x111004c
+    const v1, #android:bool@config_dreamsActivatedOnDockByDefault#t
 
     invoke-virtual {v0, v1}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -4462,6 +4458,8 @@
     .line 1248
     :cond_4
     invoke-direct {p0}, Lcom/android/server/power/PowerManagerService;->updateSuspendBlockerLocked()V
+
+    invoke-static/range {p0 .. p0}, Lcom/android/server/power/PowerManagerService$BaiduInjector;->updateButtonLightLocked(Lcom/android/server/power/PowerManagerService;)V
 
     goto :goto_0
 .end method
@@ -8872,16 +8870,14 @@
 
     iput v2, v0, Lcom/android/server/power/PowerManagerService;->mDirty:I
 
-    .line 520
     invoke-direct/range {p0 .. p0}, Lcom/android/server/power/PowerManagerService;->updatePowerStateLocked()V
 
-    .line 521
+    invoke-static/range {p0 .. p0}, Lcom/android/server/power/PowerManagerService$BaiduInjector;->regitsterButtonLightReceiver(Lcom/android/server/power/PowerManagerService;)V
+
     monitor-exit v18
 
-    .line 522
     return-void
 
-    .line 521
     .end local v14           #filter:Landroid/content/IntentFilter;
     .end local v15           #pm:Landroid/os/PowerManager;
     .end local v16           #resolver:Landroid/content/ContentResolver;
@@ -9447,4 +9443,24 @@
     invoke-static {v0, v1}, Landroid/os/Binder;->restoreCallingIdentity(J)V
 
     throw v2
+.end method
+
+.method static synthetic access$iget-mSettingsObserver-0db185(Lcom/android/server/power/PowerManagerService;)Lcom/android/server/power/PowerManagerService$SettingsObserver;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/server/power/PowerManagerService;->mSettingsObserver:Lcom/android/server/power/PowerManagerService$SettingsObserver;
+
+    return-object v0
+.end method
+
+.method static synthetic access$iget-mLightsService-24a2db(Lcom/android/server/power/PowerManagerService;)Lcom/android/server/LightsService;
+    .locals 1
+    .parameter "x0"
+
+    .prologue
+    iget-object v0, p0, Lcom/android/server/power/PowerManagerService;->mLightsService:Lcom/android/server/LightsService;
+
+    return-object v0
 .end method

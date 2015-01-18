@@ -1126,7 +1126,7 @@
 
     move-result-object v8
 
-    const v9, 0x111000d
+    const v9, #android:bool@config_sf_limitedAlpha#t
 
     invoke-virtual {v8, v9}, Landroid/content/res/Resources;->getBoolean(I)Z
 
@@ -6680,7 +6680,7 @@
 
     iget-object v2, v0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
 
-    const v8, 0x10a006d
+    const v8, #android:anim@window_move_from_decor#t
 
     invoke-static {v2, v8}, Landroid/view/animation/AnimationUtils;->loadAnimation(Landroid/content/Context;I)Landroid/view/animation/Animation;
 
@@ -29638,7 +29638,7 @@
 
     move-result-object v15
 
-    const v17, 0x1110031
+    const v17, #android:bool@config_enableWallpaperService#t
 
     move/from16 v0, v17
 
@@ -30560,16 +30560,16 @@
 .end method
 
 .method public reboot(Z)V
-    .locals 1
+    .locals 2
     .parameter "confirm"
 
     .prologue
-    .line 5208
-    const/4 v0, 0x0
+    iget-object v0, p0, Lcom/android/server/wm/WindowManagerService;->mContext:Landroid/content/Context;
 
-    invoke-virtual {p0, v0, p1}, Lcom/android/server/wm/WindowManagerService;->reboot(Ljava/lang/String;Z)V
+    const/4 v1, 0x0
 
-    .line 5209
+    invoke-static {v0, v1, p1}, Lcom/android/server/power/ShutdownThread;->reboot(Landroid/content/Context;Ljava/lang/String;Z)V
+
     return-void
 .end method
 
