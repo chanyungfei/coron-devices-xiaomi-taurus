@@ -161,8 +161,6 @@
 
 .field mAssistKeyLongPressed:Z
 
-.field private mBaiduLongPressRunnable:Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector$KillRunnable;
-
 .field mBootMsgDialog:Landroid/app/ProgressDialog;
 
 .field mBroadcastWakeLock:Landroid/os/PowerManager$WakeLock;
@@ -1056,12 +1054,6 @@
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/PhoneWindowManager$ScreenLockTimeout;-><init>(Lcom/android/internal/policy/impl/PhoneWindowManager;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mScreenLockTimeout:Lcom/android/internal/policy/impl/PhoneWindowManager$ScreenLockTimeout;
-
-    new-instance v0, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector$KillRunnable;
-
-    invoke-direct {v0}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector$KillRunnable;-><init>()V
-
-    iput-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mBaiduLongPressRunnable:Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector$KillRunnable;
 
     return-void
 .end method
@@ -2084,8 +2076,7 @@
 
     if-ne v0, v1, :cond_0
 
-    .line 838
-    invoke-direct {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchAssistAction()V
+    invoke-virtual {p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchAssistAction()V
 
     goto :goto_0
 .end method
@@ -2585,7 +2576,7 @@
     goto :goto_0
 .end method
 
-.method private launchAssistAction()V
+.method protected launchAssistAction()V
     .locals 6
 
     .prologue
@@ -2654,7 +2645,7 @@
     goto :goto_0
 .end method
 
-.method private launchAssistLongPressAction()V
+.method protected launchAssistLongPressAction()V
     .locals 5
 
     .prologue
@@ -11505,7 +11496,7 @@
     .end local v30           #now:J
     .end local v37           #timeoutTime:J
     :goto_2
-    :goto_baidu_0
+    #:goto_baidu_0
     return-wide v5
 
     .end local v15           #canceled:Z
@@ -11632,23 +11623,23 @@
     goto :goto_2
 
     :cond_8
-    const/4 v3, -0x1
+    #const/4 v3, -0x1
 
-    move-object/from16 v0, p0
+    #move-object/from16 v0, p0
 
-    move-object/from16 v1, p2
+    #move-object/from16 v1, p2
 
-    invoke-static {v0, v1}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->longPressKiller(Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/view/KeyEvent;)I
+    #invoke-static {v0, v1}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->longPressKiller(Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/view/KeyEvent;)I
 
-    move-result v5
+    #move-result v5
 
-    if-ne v3, v5, :cond_baidu_0
+    #if-ne v3, v5, :cond_baidu_0
 
-    const-wide/16 v5, -0x1
+    #const-wide/16 v5, -0x1
 
-    goto :goto_baidu_0
+    #goto :goto_baidu_0
 
-    :cond_baidu_0
+    #:cond_baidu_0
 
     const/4 v3, 0x3
 
@@ -11799,7 +11790,7 @@
     goto/16 :goto_2
 
     :cond_c
-    invoke-static/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->launchHomeFromHotKeyIfNeeded(Lcom/android/internal/policy/impl/PhoneWindowManager;)V
+    invoke-virtual/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchHomeFromHotKey()V
 
     const-wide/16 v5, -0x1
 
@@ -12192,22 +12183,18 @@
 
     if-ne v0, v3, :cond_1f
 
-    .line 2222
     const/4 v3, 0x1
 
     move-object/from16 v0, p0
 
     iput-boolean v3, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mAssistKeyLongPressed:Z
 
-    .line 2223
     if-nez v26, :cond_1f
 
-    .line 2224
-    invoke-direct/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchAssistLongPressAction()V
+    invoke-virtual/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchAssistLongPressAction()V
 
     goto :goto_7
 
-    .line 2228
     :cond_21
     move-object/from16 v0, p0
 
@@ -12224,16 +12211,13 @@
 
     goto :goto_7
 
-    .line 2231
     :cond_22
     if-nez v26, :cond_1f
 
-    .line 2232
-    invoke-direct/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchAssistAction()V
+    invoke-virtual/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->launchAssistAction()V
 
     goto :goto_7
 
-    .line 2237
     :cond_23
     const/16 v3, 0x78
 
@@ -13270,7 +13254,6 @@
 
     const/4 v11, 0x1
 
-    .line 4005
     .local v11, isWakeKey:Z
     :goto_5
     if-eqz v6, :cond_7
@@ -13502,7 +13485,7 @@
 
     if-nez v17, :cond_0
 
-    invoke-static/range {p0 .. p1}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->interceptKeyBeforeQueueingHook(Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/view/KeyEvent;)V
+    #invoke-static/range {p0 .. p1}, Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector;->interceptKeyBeforeQueueingHook(Lcom/android/internal/policy/impl/PhoneWindowManager;Landroid/view/KeyEvent;)V
 
     .line 4053
     sparse-switch v12, :sswitch_data_0
@@ -20857,14 +20840,4 @@
         :pswitch_b
         :pswitch_0
     .end packed-switch
-.end method
-
-.method static synthetic access$iget-mBaiduLongPressRunnable-c9b5d2(Lcom/android/internal/policy/impl/PhoneWindowManager;)Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector$KillRunnable;
-    .locals 1
-    .parameter "x0"
-
-    .prologue
-    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mBaiduLongPressRunnable:Lcom/android/internal/policy/impl/PhoneWindowManager$BaiduInjector$KillRunnable;
-
-    return-object v0
 .end method
